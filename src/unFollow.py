@@ -7,22 +7,23 @@ import time
 # 配置变量
 config = {
     # 用户ID
-    'userId':'',       # TODO
+    'userId':'',  # TODO, 你的用户id，PC上在币乎页面，按F12，network页面找到对应的请求，可以找到
     # 登录token
-    'accessToken':''   # TODO
+    'accessToken':'' # TODO, 你的token，登录后币乎服务器返回，获取方法与userId相同。
 }
 
 def datetime_str():  
-    format = '%Y-%m-%d %H:%M:%S'  
+    format = '%Y-%m-%d %H:%M:%S'
     value = time.localtime(time.time())
     dt = time.strftime(format,value)  
     return dt
 
+# 打印日志信息
 def print_info(info):
     log = "[%s]--%s" % (datetime_str(), info)
     print(log)
 
-# 获取关注列表    
+# 取消关注某人    
 def unFollow(subjectUserId, userName):
     print_info("取消关注【%s】..." % (userName))
     url = r'https://be02.bihu.com/bihube-pc/api/content/unFollow'
@@ -55,7 +56,7 @@ def unFollow(subjectUserId, userName):
 
     return rsp
 
-# 获取关注列表    
+# 获取关注列表，pageNum为页序    
 def getUserFollowList(pageNum):
     print_info("查询第【" + str(pageNum) + "】页关注列表" )
     url = r'https://be02.bihu.com/bihube-pc/api/content/show/getUserFollowList'
@@ -74,6 +75,7 @@ def getUserFollowList(pageNum):
         'accessToken': config['accessToken'],
         'pageNum': pageNum
     }
+    
     context = ssl._create_unverified_context()
     data = parse.urlencode(data).encode('utf-8')
     req = request.Request(url, headers=headers, data=data)
@@ -94,16 +96,17 @@ def parse_follow_list(body):
     # 请求是否成功
     is_succ = False;
     pages = 0;
-    log_content_format = '【%s】的头像是:%s'
+    log_content_format = '【%s】的粉丝数：%d，头像是:%s'
     if res == 1 and data_str["data"]["size"] > 0:
         pages = data_str["data"]["pages"]
         # 遍历关注对象
         for item in data_str["data"]["list"]:
-            if item["userName"].startswith("币友_") or item["userIcon"] == "img/bihu_user_default_icon.png":
-                #print(item)
-                log_content = log_content_format % (item['userName'], item["userIcon"])
+            if item["userName"].startswith("币友_") \
+            or item["userIcon"] == "img/bihu_user_default_icon.png"\
+            or item["fans"] < 500:
+                log_content = log_content_format % (item['userName'], item["fans"], item["userIcon"])
                 print_info(log_content)
-                # 取消关注
+                # 昵称以币友_开始，userIcon为默认，且粉丝数小于500的，取消关注
                 unFollow(item["userId"],item['userName'])
     
     if res == 1:
@@ -112,10 +115,11 @@ def parse_follow_list(body):
     return is_succ, pages
 
 def Run():
-    # 第一次获取
+    # 第一次获取，为了拿到页数，好做循环
     pageIndex = 1
     body = getUserFollowList(pageIndex)
     is_suc, pages = parse_follow_list(body)
+
     while is_suc and pageIndex < pages:
         pageIndex += 1
         time.sleep(10)
