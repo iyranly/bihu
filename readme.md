@@ -1,8 +1,8 @@
-### 币乎小助手
+# 币乎小助手
 
 BY [一休哥](https://bihu.com/people/197646)
 
-#### 币乎取消关注小助手
+## 币乎取消关注小助手
 **运行效果图**：
 
 ![取消关注运行效果图](https://bihu2001.oss-cn-shanghai.aliyuncs.com/img/e168d5b9260bd21b4ca39fd78bcb800b.gif?x-oss-process=style/size_lg)
