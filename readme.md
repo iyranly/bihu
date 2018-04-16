@@ -1,18 +1,17 @@
-### 币乎小助手
----
+# 币乎小助手
 
 BY [一休哥](https://bihu.com/people/197646)
 
-#### 币乎取消关注小助手
----
-- **运行效果图**：
+## 币乎取消关注小助手
+**运行效果图**：
+
 ![取消关注运行效果图](https://bihu2001.oss-cn-shanghai.aliyuncs.com/img/e168d5b9260bd21b4ca39fd78bcb800b.gif?x-oss-process=style/size_lg)
 
 **使用说明**：
 - 安装`python`运行环境：[Python 3.6.5](https://www.python.org/ftp/python/3.6.5/python-3.6.5.exe)
 - 下载`src`文件夹下的脚本。
 - 在电脑端登录币乎，浏览器上按键盘F12，抓包，`network`下，看getUserFollowList请求的参数，拿到`userId`，和`accessToken`。
-![Alt text](https://bihu2001.oss-cn-shanghai.aliyuncs.com/img/28746efe93791033372a1718621fa77e.png?x-oss-process=style/size_lg)
+![image](https://bihu2001.oss-cn-shanghai.aliyuncs.com/img/28746efe93791033372a1718621fa77e.png?x-oss-process=style/size_lg)
 
 - 打开.py文件，修改`config`，将拿到的`userId`和`accessToken`填入:
 ```
