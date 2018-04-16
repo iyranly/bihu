@@ -9,7 +9,9 @@ config = {
     # 用户ID
     'userId':'',  # TODO, 你的用户id，PC上在币乎页面，按F12，network页面找到对应的请求，可以找到
     # 登录token
-    'accessToken':'' # TODO, 你的token，登录后币乎服务器返回，获取方法与userId相同。
+    'accessToken':'', # TODO, 你的token，登录后币乎服务器返回，获取方法与userId相同。
+	# 粉丝条件，粉丝少于多少个时，取消关注
+    'fansCondition':100 # 可以根据你的实际情况设置阈值条件
 }
 
 def datetime_str():  
@@ -103,10 +105,10 @@ def parse_follow_list(body):
         for item in data_str["data"]["list"]:
             if item["userName"].startswith("币友_") \
             or item["userIcon"] == "img/bihu_user_default_icon.png"\
-            or item["fans"] < 500:
+            or item["fans"] < config['fansCondition']:
                 log_content = log_content_format % (item['userName'], item["fans"], item["userIcon"])
                 print_info(log_content)
-                # 昵称以币友_开始，userIcon为默认，且粉丝数小于500的，取消关注
+                # 昵称以币友_开始，userIcon为默认，且粉丝数小于配置的，取消关注
                 unFollow(item["userId"],item['userName'])
     
     if res == 1:
@@ -116,19 +118,23 @@ def parse_follow_list(body):
 
 def Run():
     # 第一次获取，为了拿到页数，好做循环
-    pageIndex = 1
-    body = getUserFollowList(pageIndex)
-    is_suc, pages = parse_follow_list(body)
-
+    pageIndex = 0
+    pages = 1
+    is_suc = True
+ 
     while is_suc and pageIndex < pages:
         pageIndex += 1
-        time.sleep(10)
+        time.sleep(1)
         body = getUserFollowList(pageIndex)
         is_suc, pages = parse_follow_list(body)
-
-    if (not is_suc):
-        print_info(body)
-        print_info("请稍后重试")
         
+		# 请求太频繁时，进入下面等待，一分钟检测一次
+        while (not is_suc):
+            print_info(body)
+            print_info("60秒后请稍后重试")
+            time.sleep(60)
+            body = getUserFollowList(pageIndex)
+            is_suc, pages = parse_follow_list(body)
+            
 Run()
 print_info("程序已退出")
