@@ -20,9 +20,11 @@ config = {
     # 用户ID
     'userId':'你的userId填到这里',  # TODO, 你的用户id，PC上在币乎页面，按F12，network页面找到对应的请求，可以找到
     # 登录token
-    'accessToken':'你的token填到这里' # TODO, 你的token，登录后币乎服务器返回，获取方法与userId相同。
+    'accessToken':'你的token填到这里', # TODO, 你的token，登录后币乎服务器返回，获取方法与userId相同。
+    # 粉丝条件，粉丝少于多少个时，取消关注
+    'fansCondition':100 # 可以根据你的实际情况设置阈值条件
 }
 ```
-- 双击运行.py
+- 双击运行unFollow.py
 
 若有问题，可在bihu我的[首页内的文章中](https://bihu.com/people/197646)留言。
