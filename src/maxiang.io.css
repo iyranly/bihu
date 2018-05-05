@@ -1,0 +1,52 @@
+h1,h2,h3,h4,h5,h6 {
+	margin-top: 1.2em;
+    margin-right: 0px;
+    margin-bottom: 0.1em;
+    margin-left: 0px;
+    color: #007700;
+	text-align:center;
+    font-weight:bold;
+}
+
+hr {
+	margin-top: 0.1em;
+    margin-right: 0.5em;
+    margin-bottom: 2em;
+    margin-left: 0em;
+}
+
+p, pre, pre.prettyprint, blockquote {
+    margin: 0 0 1.1em;
+    line-height: 33px;
+    color: rgb(30, 30, 30);
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 400;
+    text-align: start;
+    word-wrap: break-word;
+    overflow: hidden;
+    font-variant-east-asian: normal;
+    margin: 15px 5px !important;
+    font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, Song, sans-serif;
+}
+
+blockquote {
+    margin: 1.2em 0px;
+	border-left: 4px solid rgb(221, 221, 221); 
+	padding: 0px 1em; 
+	color: rgb(119, 119, 119); 
+	quotes: none;
+	margin: 10px 5px;
+	border-left: 2px solid rgb(0, 150, 136); 
+	padding: 0px 10px; color: rgb(119, 119, 119); 
+	quotes: none; 
+	margin-left: 1em;
+}
+
+.note-content div, .note-content dl, .note-content dt, .note-content em, .note-content font, .note-content h3, .note-content h4, .note-content h5, .note-content h6, .note-content hr, .note-content i, .note-content ins, .note-content kbd, .note-content li, .note-content map, .note-content ol, .note-content p, .note-content pre, .note-content q, .note-content s, .note-content samp, .note-content small, .note-content span, .note-content strike, .note-content strong, .note-content sub, .note-content sup, .note-content table, .note-content tbody, .note-content td, .note-content tfoot, .note-content th, .note-content thead, .note-content tr, .note-content tt, .note-content u, .note-content ul {
+    line-height: 33px;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
