@@ -109,7 +109,7 @@ def GenerateBihuQRCode(data):
 
 def Run():
     # 生成币乎二维码
-    img = GenerateBihuQRCode("https://bihu.com/people/197646")
+    img = GenerateBihuQRCode(config['homepage'])
 
     # 保存二维码到桌面
     save_path = get_desktop() + '/bihu_logo.png';
